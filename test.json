@@ -1,19 +1,43 @@
 [
   {
-    "component_name": "while",
+    "component_name": "read_excel",
     "hierarcy": 0,
-    "parameters": [],
-    "d_parameter": "True:",
-    "return_variable": ""
+    "parameters": [
+      {
+        "parameter_name": "excel_path",
+        "parameter_value": "'/Users/dogactopay/Downloads/categori.xlsx'",
+        "parameter_type": "str"
+      }
+    ],
+    "d_parameter": "",
+    "return_variable": "df"
   },
   {
-    "component_name": "yaz1",
-    "hierarcy": 1,
+    "component_name": "get_row",
+    "hierarcy": 0,
+    "parameters": [
+      {
+        "parameter_name": "df",
+        "parameter_value": "df",
+        "parameter_type": "str"
+      },
+      {
+        "parameter_name": "row",
+        "parameter_value": "5",
+        "parameter_type": "str"
+      }
+    ],
+    "d_parameter": "",
+    "return_variable": "df_row"
+  },
+  {
+    "component_name": "yaz",
+    "hierarcy": 0,
     "parameters": [
       {
         "parameter_name": "text",
-        "parameter_value": "10",
-        "parameter_type": "int"
+        "parameter_value": "df_row",
+        "parameter_type": "str"
       }
     ],
     "d_parameter": "",

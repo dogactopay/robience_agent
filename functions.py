@@ -1,21 +1,13 @@
+import pandas as pd
 
 
-
-def yaz1(text):
-    return print(f"{text} yaz1ıldı.")
-
-
-def yaz2(text):
-    return print(f"{text} yaz2ıldı.")
+def yaz(text):
+    return print(text)
 
 
-def yaz3(text):
-    return print(f"{text} yaz3ıldı.")
+def read_excel(excel_path):
+    return pd.read_excel(excel_path, engine='openpyxl')
 
 
-def carp(sayi):
-    return int(sayi) * 10 
-
-
-def set_parameter(variable_name, variable_value):
-    return f"{variable_name}='{variable_value}'"
+def get_row(df, row):
+    return df.iloc[row]
