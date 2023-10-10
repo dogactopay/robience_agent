@@ -1,35 +1,29 @@
 from functions import *
-###### TODO ######
-# SET PARAMETER EKLENECEK
-# GET PARAMETER EKLENECEK
-# DATA İÇERİSİNDEKİ PARAMETRELER TEK TİP YAPILACAK
-# D_PARAMETER KOŞULSUZ OLACAK
-###### TODO ######
+from master_functions import *
+import json
 
 
-data = [
-    {"component_name": "while",  "hierarcy": 0,
-        "parameters": [], "d_parameter": "True:"},
-    {"component_name": "if",  "hierarcy": 1,
-        "parameters": [], "d_parameter": "a > 10:"},
-    {"component_name": "yaz1", "hierarcy": 2,
-        "parameters": [{"text": "'deneme'"}]},
-]
+with open('test.json') as f:
+    data = json.load(f)
 
 
 code_list = []
 
 for i in data:
 
-    loop_add = ("\t" * (i['hierarcy']))
+    spaceSt = '' if i['parameters'] else ' '
 
-    if len(i["parameters"]) > 0:
-        code_list.append(
-            f"{loop_add}{i['component_name']}({','.join([f'{list(k.keys())[0]}={list(k.values())[0]}' for k in i['parameters']])})")
+    i = exceptional_operations(i)
 
-    elif "d_parameter" in list(i.keys()):
-        code_list.append(
-            f"{loop_add}{i['component_name']}{','.join([f'{list(k.keys())[0]}={list(k.values())[0]}' for k in i['parameters']])} {i['d_parameter']}")
+    hierarcy_add = ("\t" * (i['hierarcy']))
+
+    brSt = ['', ''] if i['d_parameter'] else ['(', ')']
+
+    returnSt = str(i['return_variable'])+"=" if i['return_variable'] else ""
+
+    cont = f"{hierarcy_add}{returnSt}{i['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' +str(k['parameter_value']) for k in i['parameters']])}{spaceSt}{i['d_parameter']}{brSt[1]}"
+
+    code_list.append(cont)
 
 
 run_code = "\n".join(code_list)

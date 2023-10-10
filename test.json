@@ -1,0 +1,22 @@
+[
+  {
+    "component_name": "while",
+    "hierarcy": 0,
+    "parameters": [],
+    "d_parameter": "True:",
+    "return_variable": ""
+  },
+  {
+    "component_name": "yaz1",
+    "hierarcy": 1,
+    "parameters": [
+      {
+        "parameter_name": "text",
+        "parameter_value": "10",
+        "parameter_type": "int"
+      }
+    ],
+    "d_parameter": "",
+    "return_variable": ""
+  }
+]
