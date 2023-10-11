@@ -1,33 +1,42 @@
 from functions import *
 from master_functions import *
-import json
+import time
+from colorama import Fore, Back, Style
 
 
+license_key = "lxeOM0OMxI"
 
 
-with open('test.json') as f:
-    data = json.load(f)
+response_config = get_data(f"/agent/{license_key}/config/")
 
 
-code_list = []
+if response_config.status_code == 200:
 
-for i in data:
+    time_interval = int(response_config.json()["config"]['fetch_timeout'])
 
-    spaceSt = '' if i['parameters'] else ' '
+    if response_config.json()['is_active']:
 
-    i = exceptional_operations(i)
+        while True:
+            response = get_data(f"/agent/{license_key}/pending_job/").json()
+            if response:
 
-    hierarcy_add = ("\t" * (i['hierarcy']))
+                data = response[0]['content']
 
-    brSt = ['', ''] if i['d_parameter'] else ['(', ')']
+                # with open('test.json') as f:
+                #     data = json.load(f)
 
-    returnSt = str(i['return_variable'])+"=" if i['return_variable'] else ""
+                run_code = generate_code(data)
 
-    cont = f"{hierarcy_add}{returnSt}{i['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' +str(k['parameter_value']) for k in i['parameters']])}{spaceSt}{i['d_parameter']}{brSt[1]}"
-
-    code_list.append(cont)
-
-
-run_code = "\n".join(code_list)
-
-print(run_code)
+                try:
+                    exec(run_code)
+                except Exception as e:
+                    set_status(response[0]['job_id'], 2, str(e))
+                else:
+                    set_status(response[0]['job_id'], 1, "SUCCESS")
+            else:
+                print(Fore.YELLOW + "Waiting job.")
+                time.sleep(time_interval)
+    else:
+        print(Fore.RED + "Agent is not active.Please contact with Robenice Support Team.")
+else:
+    print(Fore.RED + "License Key is not valid.")
