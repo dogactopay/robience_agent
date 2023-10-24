@@ -2,9 +2,9 @@ from functions import *
 from master_functions import *
 import time
 from colorama import Fore, Back, Style
+import json
 
-
-license_key = "lxeOM0OMxI"
+license_key = "VcbA5wK5Zh"
 
 
 response_config = get_data(f"/agent/{license_key}/config/")
@@ -18,24 +18,29 @@ if response_config.status_code == 200:
 
         while True:
             response = get_data(f"/agent/{license_key}/pending_job/").json()
+            # with open('test.json') as f:
+            #     response = json.load(f)
+
             if response:
-
-                data = response[0]['content']
-
-                # with open('test.json') as f:
-                #     data = json.load(f)
+                data = sort_code(response)
 
                 run_code = generate_code(data)
+                extra_parameters = create_extra_variables(response)
 
                 try:
-                    exec(run_code)
+
+                    exec(run_code, None, extra_parameters)
+                    print(run_code)
                 except Exception as e:
-                    set_status(response[0]['job_id'], 2, str(e))
+                    set_status(response[0]['job_id'], 0, str(e))
                 else:
-                    set_status(response[0]['job_id'], 1, "SUCCESS")
+
+                    set_status(response[0]['job_id'], 0, "SUCCESS")
             else:
                 print(Fore.YELLOW + "Waiting job.")
                 time.sleep(time_interval)
+
+            break
     else:
         print(Fore.RED + "Agent is not active.Please contact with Robenice Support Team.")
 else:

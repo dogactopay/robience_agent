@@ -1,4 +1,9 @@
 import pandas as pd
+import requests as rq
+
+
+def get_request(method, url, data, headers):
+    return rq.request(method=method, url=url, data=data, headers=headers).json()
 
 
 def yaz(text):
