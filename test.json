@@ -1,396 +1,70 @@
 [
   {
-      "created": "2023-10-24T14:53:07.463251+03:00",
-      "updated_at": "2023-10-24T14:53:07.463292+03:00",
+      "created": "2023-10-25T17:07:47.961316+03:00",
+      "updated_at": "2023-10-25T17:07:47.961366+03:00",
       "agent": 31,
       "status": 0,
       "job_response": "",
       "extra_parameters": [],
-      "job_id": 27,
+      "job_id": 29,
       "scenario": {
-          "screnario_id": 32,
-          "created": "2023-10-24T14:24:07.893097+03:00",
-          "screnario_name": "Request TEST",
+          "screnario_id": 38,
+          "created": "2023-10-25T17:05:17.910525+03:00",
+          "screnario_name": "script_test",
           "content": {
-              "edges": [
-                  {
-                      "id": "reactflow__edge-dndnode_3b-dndnode_4",
-                      "type": "buttonedge",
-                      "source": "dndnode_3",
-                      "target": "dndnode_4",
-                      "selected": false,
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_7b-dndnode_8",
-                      "type": "buttonedge",
-                      "source": "dndnode_7",
-                      "target": "dndnode_8",
-                      "selected": false,
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_8b-dndnode_9",
-                      "type": "buttonedge",
-                      "source": "dndnode_8",
-                      "target": "dndnode_9",
-                      "selected": false,
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_9b-dndnode_10",
-                      "type": "buttonedge",
-                      "source": "dndnode_9",
-                      "target": "dndnode_10",
-                      "selected": false,
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_10b-dndnode_3",
-                      "type": "buttonedge",
-                      "source": "dndnode_10",
-                      "target": "dndnode_3",
-                      "selected": false,
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_11b-dndnode_7",
-                      "type": "buttonedge",
-                      "source": "dndnode_11",
-                      "target": "dndnode_7",
-                      "selected": false,
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_4b-dndnode_12",
-                      "type": "buttonedge",
-                      "source": "dndnode_4",
-                      "target": "dndnode_12",
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_12b-dndnode_6",
-                      "type": "buttonedge",
-                      "source": "dndnode_12",
-                      "target": "dndnode_6",
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  },
-                  {
-                      "id": "reactflow__edge-dndnode_6b-dndnode_13",
-                      "type": "buttonedge",
-                      "source": "dndnode_6",
-                      "target": "dndnode_13",
-                      "sourceHandle": "b",
-                      "targetHandle": null
-                  }
-              ],
+              "edges": [],
               "nodes": [
                   {
-                      "id": "dndnode_3",
+                      "id": "dndnode_0",
                       "data": {
                           "data": {
                               "hierarcy": 0,
-                              "parameters": [],
-                              "d_parameter": "",
-                              "display_name": "Else",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_3",
-                          "component_name": "else",
-                          "component_type": "builtinNode"
-                      },
-                      "type": "builtinNode",
-                      "width": 120,
-                      "height": 55,
-                      "dragging": false,
-                      "position": {
-                          "x": 520.8698366133516,
-                          "y": 198.7407656465837
-                      },
-                      "selected": false,
-                      "positionAbsolute": {
-                          "x": 520.8698366133516,
-                          "y": 198.7407656465837
-                      }
-                  },
-                  {
-                      "id": "dndnode_4",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
+                              "is_return": true,
                               "parameters": [
                                   {
-                                      "parameter_name": "text",
-                                      "parameter_type": "str",
-                                      "parameter_value": "Yanlış"
-                                  }
-                              ],
-                              "d_parameter": "",
-                              "display_name": "Print",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_4",
-                          "component_name": "yaz",
-                          "component_type": "customNode"
-                      },
-                      "type": "customNode",
-                      "width": 120,
-                      "height": 36,
-                      "dragging": false,
-                      "position": {
-                          "x": 518.4901456890841,
-                          "y": 282.7279667094323
-                      },
-                      "selected": false,
-                      "positionAbsolute": {
-                          "x": 518.4901456890841,
-                          "y": 282.7279667094323
-                      }
-                  },
-                  {
-                      "id": "dndnode_6",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [
-                                  {
-                                      "parameter_name": "text",
-                                      "parameter_type": "str",
-                                      "parameter_value": "test"
-                                  }
-                              ],
-                              "d_parameter": "",
-                              "display_name": "Print",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_6",
-                          "component_name": "yaz",
-                          "component_type": "customNode"
-                      },
-                      "type": "customNode",
-                      "width": 120,
-                      "height": 36,
-                      "dragging": false,
-                      "position": {
-                          "x": 583.0101547707766,
-                          "y": 496.0815385600756
-                      },
-                      "selected": false
-                  },
-                  {
-                      "id": "dndnode_7",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [
-                                  {
-                                      "parameter_name": "text",
-                                      "parameter_type": "str",
-                                      "parameter_value": "'text'"
-                                  }
-                              ],
-                              "d_parameter": "",
-                              "display_name": "Print",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_7",
-                          "component_name": "yaz",
-                          "component_type": "customNode"
-                      },
-                      "type": "customNode",
-                      "width": 120,
-                      "height": 36,
-                      "position": {
-                          "x": 584.4334797279967,
-                          "y": 1.3751731521919142
-                      }
-                  },
-                  {
-                      "id": "dndnode_8",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [],
-                              "d_parameter": "True:",
-                              "display_name": "Condition",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_8",
-                          "component_name": "if",
-                          "component_type": "builtinNode"
-                      },
-                      "type": "builtinNode",
-                      "width": 120,
-                      "height": 55,
-                      "dragging": false,
-                      "position": {
-                          "x": 681.7241671195346,
-                          "y": 78.60592499908282
-                      },
-                      "selected": false,
-                      "positionAbsolute": {
-                          "x": 681.7241671195346,
-                          "y": 78.60592499908282
-                      }
-                  },
-                  {
-                      "id": "dndnode_9",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [
-                                  {
-                                      "parameter_name": "text",
-                                      "parameter_type": "str",
-                                      "parameter_value": "'text'"
-                                  }
-                              ],
-                              "d_parameter": "",
-                              "display_name": "Print",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_9",
-                          "component_name": "yaz",
-                          "component_type": "customNode"
-                      },
-                      "type": "customNode",
-                      "width": 120,
-                      "height": 36,
-                      "position": {
-                          "x": 830.1676901499221,
-                          "y": 177.90260594508533
-                      }
-                  },
-                  {
-                      "id": "dndnode_10",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [],
-                              "d_parameter": "",
-                              "display_name": "End Condition",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_10",
-                          "component_name": "",
-                          "component_type": "breakNode"
-                      },
-                      "type": "breakNode",
-                      "width": 60,
-                      "height": 36,
-                      "position": {
-                          "x": 878.3115354570749,
-                          "y": 306.286193430826
-                      }
-                  },
-                  {
-                      "id": "dndnode_11",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [
-                                  {
-                                      "parameter_name": "text",
-                                      "parameter_type": "str",
-                                      "parameter_value": "hapus"
-                                  }
-                              ],
-                              "d_parameter": "",
-                              "display_name": "Print",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_11",
-                          "component_name": "yaz",
-                          "component_type": "customNode"
-                      },
-                      "type": "customNode",
-                      "width": 120,
-                      "height": 36,
-                      "dragging": false,
-                      "position": {
-                          "x": 637.0747769908471,
-                          "y": -102.69485024319206
-                      },
-                      "selected": false
-                  },
-                  {
-                      "id": "dndnode_12",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [
-                                  {
-                                      "parameter_name": "url",
-                                      "parameter_type": "str",
-                                      "parameter_value": "'URL'"
+                                      "parameter_name": "script",
+                                      "parameter_type": "script",
+                                      "parameter_value": "[\n  {\n    \"name\": \"Ping Playbook\",\n    \"hosts\": \"localhost\",\n    \"tasks\": [\n      {\n        \"name\": \"Ping all hosts\",\n        \"ping\": null\n      }\n    ]\n  }\n]"
                                   },
                                   {
-                                      "parameter_name": "method",
+                                      "parameter_name": "host_ip",
+                                      "parameter_type": "str",
+                                      "parameter_value": "38.242.233.96"
+                                  },
+                                  {
+                                      "parameter_name": "username",
+                                      "parameter_type": "str",
+                                      "parameter_value": "root"
+                                  },
+                                  {
+                                      "parameter_name": "password",
+                                      "parameter_type": "str",
+                                      "parameter_value": "r0b3nic3!!"
+                                  },
+                                  {
+                                      "parameter_name": "os",
                                       "parameter_type": "dropdown",
-                                      "parameter_value": "GET,POST,DELETE,PATCH,PUT"
-                                  },
-                                  {
-                                      "parameter_name": "data",
-                                      "parameter_type": "str",
-                                      "parameter_value": "data"
-                                  },
-                                  {
-                                      "parameter_name": "headers",
-                                      "parameter_type": "str",
-                                      "parameter_value": "headers"
+                                      "parameter_value": "linux"
                                   }
                               ],
                               "d_parameter": "",
-                              "display_name": "HTTP Request",
-                              "return_variable": "response"
+                              "display_name": "Run Ansible Playbook",
+                              "return_variable": "",
+                              "extra_parameters": []
                           },
-                          "component_id": "dndnode_12",
-                          "component_name": "http_request",
+                          "component_id": "dndnode_0",
+                          "component_name": "run_ansible_playbook",
                           "component_type": "customNode"
                       },
                       "type": "customNode",
                       "width": 120,
                       "height": 36,
+                      "dragging": false,
                       "position": {
-                          "x": 620.3154942082875,
-                          "y": 382.6246687824627
-                      }
-                  },
-                  {
-                      "id": "dndnode_13",
-                      "data": {
-                          "data": {
-                              "hierarcy": 0,
-                              "parameters": [
-                                  {
-                                      "parameter_name": "file_path",
-                                      "parameter_type": "str",
-                                      "parameter_value": "Dosya Yolu"
-                                  }
-                              ],
-                              "d_parameter": "",
-                              "display_name": "Excelden Dataset",
-                              "return_variable": ""
-                          },
-                          "component_id": "dndnode_13",
-                          "component_name": "read_excel_to_dataset",
-                          "component_type": "customNode"
+                          "x": 359,
+                          "y": 95
                       },
-                      "type": "customNode",
-                      "width": 120,
-                      "height": 36,
-                      "position": {
-                          "x": 880.8001007273218,
-                          "y": 604.6771202413116
-                      }
+                      "selected": true
                   }
               ]
           },

@@ -60,6 +60,7 @@ def generate_code(data):
 
     data = data[0]['scenario']['content']['nodes']
     data = set_hierarcy(data)
+
     for i in data:
 
         spaceSt = '' if i['data']['data']['parameters'] else ' '
@@ -76,7 +77,7 @@ def generate_code(data):
 
         cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']))) for k in i['data']['data']['parameters']])}{spaceSt}{i['data']['data']['d_parameter']}{brSt[1]}'''
 
-        code_list.append(cont)
+        code_list.append(cont.replace("\n", ""))
 
     run_code = "\n".join(code_list)
 
@@ -84,13 +85,23 @@ def generate_code(data):
 
 
 def exceptional_operations(i):
-    
+
     if "set_variable" == i['data']['component_name']:
         i['data']['component_name'] = ""
         i['data']['data']['d_parameter'] = (str([k["parameter_value"] for k in i['data']['data']['parameters'] if k["parameter_name"] == 'variable_name'
                                                  ][0]) + "=" + str([k["parameter_value"] for k in i['data']['data']['parameters'] if k["parameter_name"] == 'variable_value'
                                                                     ][0]))
+
         i['data']['data']['parameters'] = []
+
+    if "python_script" == i['data']['component_name']:
+        i['data']['component_name'] = ""
+        i['data']['data']['d_parameter'] = str([k["parameter_value"] for k in i['data']['data']['parameters'] if k["parameter_name"] == 'script'
+                                                ][0])
+        hierarcy_add = ("\t" * (i['data']['data']['hierarcy']))
+        i['data']['data']['parameters'] = []
+        i['data']['data']['d_parameter'] = i['data']['data']['d_parameter'].replace(
+            "\n\n", "\n").replace("\n", f"\n{hierarcy_add}")
 
 
 ###### BUILT IN ELSE AYARI VE : AYARI ######
