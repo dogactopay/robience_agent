@@ -23,7 +23,7 @@ def open_chrome_browser():
     opt.add_argument("--start-maximized")
     chromedriver_autoinstaller.install()
     driver = webdriver.Chrome(options=opt)
-        print("Chrome tarayıcı açıldı.")
+        print("Chrome tarayıcı açıldıı.")
         return driver
     except Exception as e:
         print(f"Hata oluştu: {e}")
