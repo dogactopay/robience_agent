@@ -8,6 +8,50 @@ import json
 import yaml
 
 
+
+#############Selenium Compenents (application)###################
+
+def open_chrome_browser():
+    try:
+        driver = webdriver.Chrome()
+        print("Chrome tarayıcı açıldı.")
+        return driver
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+
+def navigate_to_url(driver, url):
+    try:
+        driver.get(url)
+        print(f"Belirtilen URL'ye gidildi: {url}")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+
+def close_browser(driver):
+    try:
+        driver.quit()
+        print("Tarayıcı kapatıldı.")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+
+def find_element_by_xpath(driver, xpath):
+    try:
+        element = driver.find_element_by_xpath(xpath)
+        return element
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+        return None
+
+def find_elements_by_xpath(driver, xpath):
+    try:
+        elements = driver.find_elements_by_xpath(xpath)
+        return elements
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+        return []
+
+
+
+
 def get_request(method, url, data, headers):
     return rq.request(method=method, url=url, data=data, headers=headers).json()
 
