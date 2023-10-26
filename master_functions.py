@@ -1,6 +1,38 @@
 import requests
 from IPython import embed
 import time
+import os
+
+
+def check_license_key():
+    while True:
+        if os.name == 'nt':  # Windows
+            file_path = os.path.join(os.path.expanduser(
+                '~'), 'Documents/robenice_agent/key.txt')
+        else:
+            file_path = os.path.expanduser(
+                '~/Documents/robenice_agent/key.txt')
+
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                key1 = f.read()
+
+                break
+
+        else:
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+            key = input("Enter Licance Key : ")
+
+            response_config = get_data(f"/agent/{key}/config/")
+
+            if response_config.status_code == 200:
+                with open(file_path, 'w') as f:
+                    f.write(key)
+            else:
+                print("Not valid key!")
+                time.sleep(5)
+    return key1
 
 
 def create_extra_variables(data):

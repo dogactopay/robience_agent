@@ -4,9 +4,13 @@ import time
 from colorama import Fore, Back, Style
 import json
 
-license_key = "VcbA5wK5Zh"
+# LICANCE KEY FOR IDENTIFICATION
 
 
+license_key = check_license_key()
+
+
+# GET CONFIG VALUE FOR FETCH TIME INTERVAL AND IS_ACTIVE STATUS
 response_config = get_data(f"/agent/{license_key}/config/")
 
 
@@ -22,26 +26,27 @@ if response_config.status_code == 200:
             #     response = json.load(f)
 
             if response:
+
                 data = sort_code(response)
 
                 run_code = generate_code(data)
+
                 extra_parameters = create_extra_variables(response)
 
                 try:
-                    
-                    
+
                     exec(run_code, None, extra_parameters)
-                    print(run_code)
+                    # print(run_code)
 
                 except Exception as e:
                     print(e)
                     set_status(response[0]['job_id'], 0, str(e))
-                else:
 
+                else:
                     set_status(response[0]['job_id'], 0, "SUCCESS")
-            else:
-                print(Fore.YELLOW + "Waiting job.")
-                time.sleep(time_interval)
+
+            print(Fore.YELLOW + "Waiting job.")
+            time.sleep(time_interval)
             break
 
     else:
