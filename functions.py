@@ -6,14 +6,23 @@ import ansible_runner
 import re
 import json
 import yaml
+import chromedriver_autoinstaller
 
 
+opt = webdriver.ChromeOptions()
+opt.add_argument("--start-maximized")
+
+chromedriver_autoinstaller.install()
+driver = webdriver.Chrome(options=opt)
 
 #############Selenium Compenents (application)###################
 
 def open_chrome_browser():
     try:
-        driver = webdriver.Chrome()
+    opt = webdriver.ChromeOptions()
+    opt.add_argument("--start-maximized")
+    chromedriver_autoinstaller.install()
+    driver = webdriver.Chrome(options=opt)
         print("Chrome tarayıcı açıldı.")
         return driver
     except Exception as e:
