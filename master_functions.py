@@ -62,6 +62,8 @@ def generate_code(data):
     data = set_hierarcy(data)
 
     for i in data:
+        if "parameters" not in i['data']['data'].keys():
+            i['data']['data']['parameters'] = []
 
         spaceSt = '' if i['data']['data']['parameters'] else ' '
 
@@ -121,7 +123,7 @@ def get_data(text):
     while True:
         try:
 
-            server = "http://localhost:8000"
+            server = "http://185.185.82.233/"
 
             response = requests.get(
                 f"{server}{text}")
@@ -134,7 +136,7 @@ def get_data(text):
 
 
 def set_status(job_id, status, job_response):
-    server = "http://localhost:8000"
+    server = "http://185.185.82.233/"
 
     response = requests.patch(
         f"{server}/job/{job_id}/", data={"status": status, "job_response": job_response}).json()
