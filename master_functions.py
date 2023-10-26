@@ -77,11 +77,12 @@ def generate_code(data):
         returnSt = str(i['data']['data']['return_variable']) + \
             "=" if i['data']['data']['return_variable'] else ""
 
-        d_parameters = i['data']['data']['d_parameter'] if i['data']['data']['d_parameter'] else i['data']['data']['d_parameter']
+        d_parameters = i['data']['data']['d_parameter'].replace(
+            "$", "") if i['data']['data']['d_parameter'] else i['data']['data']['d_parameter'].replace("$", "")
 
-        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']))) for k in i['data']['data']['parameters']])}{spaceSt}{i['data']['data']['d_parameter']}{brSt[1]}'''
+        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']))) for k in i['data']['data']['parameters']])}{spaceSt}{d_parameters}{brSt[1]}'''
 
-        code_list.append(cont.replace("\n", ""))
+        code_list.append(cont)
 
     run_code = "\n".join(code_list)
 
@@ -99,11 +100,13 @@ def exceptional_operations(i):
         i['data']['data']['parameters'] = []
 
     if "python_script" == i['data']['component_name']:
+
         i['data']['component_name'] = ""
         i['data']['data']['d_parameter'] = str([k["parameter_value"] for k in i['data']['data']['parameters'] if k["parameter_name"] == 'script'
                                                 ][0])
         hierarcy_add = ("\t" * (i['data']['data']['hierarcy']))
         i['data']['data']['parameters'] = []
+
         i['data']['data']['d_parameter'] = i['data']['data']['d_parameter'].replace(
             "\n\n", "\n").replace("\n", f"\n{hierarcy_add}")
 
