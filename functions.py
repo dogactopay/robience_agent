@@ -83,6 +83,8 @@ def run_ansible_playbook(script, os, host_ip, username, password):
 
     r = ansible_runner.run(playbook=playbook, inventory=my_inventory[os], envvars={
                            "ANSIBLE_SHOW_CUSTOM_STATS": True, "ANSIBLE_STDOUT_CALLBACK": "json"})
+    
+
     string_encode = r.stdout.read().encode("ascii", "ignore")
     string_decode = string_encode.decode()
     result = (string_decode.split(
@@ -94,15 +96,16 @@ def run_ansible_playbook(script, os, host_ip, username, password):
     try:
 
         output = r.stdout.read()
+        #embed()
         if "error" not in output.lower():
+
             indexOfOutPut = output.find("{", 0)
 
             jsonOutput = json.loads(output[indexOfOutPut:])
             key0 = list(jsonOutput['stats'].keys())[0]
 
             if jsonOutput['stats'][key0]['failures'] > 0 or jsonOutput['stats'][key0]['unreachable'] > 0:
-                msg = ",".join([",".join([k['hosts']["38.242.233.196"]['msg']
-                                          for k in z['tasks']]) for z in json.loads(res)['plays']])
+                msg = ",".join([",".join([k['hosts'][key0]['msg']for k in z['tasks']]) for z in json.loads(res)['plays']])
                 raise Exception(msg)
             else:
                 return "SUCCESS"

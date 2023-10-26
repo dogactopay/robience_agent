@@ -75,6 +75,8 @@ def generate_code(data):
         returnSt = str(i['data']['data']['return_variable']) + \
             "=" if i['data']['data']['return_variable'] else ""
 
+        d_parameters = i['data']['data']['d_parameter'] if i['data']['data']['d_parameter'] else i['data']['data']['d_parameter']
+
         cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']))) for k in i['data']['data']['parameters']])}{spaceSt}{i['data']['data']['d_parameter']}{brSt[1]}'''
 
         code_list.append(cont.replace("\n", ""))
