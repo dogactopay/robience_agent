@@ -6,23 +6,17 @@ import ansible_runner
 import re
 import json
 import yaml
+from selenium import webdriver
 import chromedriver_autoinstaller
+import time
 
-
-opt = webdriver.ChromeOptions()
-opt.add_argument("--start-maximized")
-
-chromedriver_autoinstaller.install()
-driver = webdriver.Chrome(options=opt)
 
 #############Selenium Compenents (application)###################
 
 def open_chrome_browser():
     try:
-    opt = webdriver.ChromeOptions()
-    opt.add_argument("--start-maximized")
-    chromedriver_autoinstaller.install()
-    driver = webdriver.Chrome(options=opt)
+        chromedriver_autoinstaller.install()
+        driver = webdriver.Chrome()
         print("Chrome tarayıcı açıldıı.")
         return driver
     except Exception as e:
@@ -58,7 +52,8 @@ def find_elements_by_xpath(driver, xpath):
         print(f"Hata oluştu: {e}")
         return []
 
-
+def give_time(sleep_time):
+    timne.sleep(sleep_time)
 
 
 def get_request(method, url, data, headers):
@@ -167,3 +162,5 @@ def run_ansible_playbook(script, os, host_ip, username, password):
     except Exception as e:
         print(e)
         raise Exception(e)
+
+
