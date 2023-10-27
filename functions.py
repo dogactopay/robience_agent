@@ -9,10 +9,10 @@ import yaml
 from selenium import webdriver
 import chromedriver_autoinstaller
 import time
-
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 
 #############Selenium Compenents (application)###################
-
 def open_chrome_browser():
     try:
         chromedriver_autoinstaller.install()
@@ -38,22 +38,73 @@ def close_browser(driver):
 
 def find_element_by_xpath(driver, xpath):
     try:
-        element = driver.find_element_by_xpath(xpath)
+        element = driver.find_element(By.XPATH, xpath)
         return element
-    except Exception as e:
-        print(f"Hata oluştu: {e}")
+    except NoSuchElementException:
+        print(f"Element bulunamadı: {xpath}")
         return None
 
 def find_elements_by_xpath(driver, xpath):
     try:
-        elements = driver.find_elements_by_xpath(xpath)
+        elements = driver.find_elements(By.XPATH, xpath)
         return elements
-    except Exception as e:
-        print(f"Hata oluştu: {e}")
+    except NoSuchElementException:
+        print(f"Elementler bulunamadı: {xpath}")
         return []
 
 def give_time(sleep_time):
-    time.sleep(sleep_time)
+    try:
+        print("sleeping...")
+        time.sleep(int(sleep_time))
+        print("sleep over.")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+
+
+ 
+def find_and_set_text(driver, xpath, text):
+    try:
+        element = find_element_by_xpath(driver, xpath)
+        element.send_keys(text)
+        print(f"'{text}' metni belirtilen alana yazıldı: {xpath}")
+    except NoSuchElementException:
+        print(f"Element bulunamadı: {xpath}")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+
+def find_and_click_element(driver, xpath):
+    try:
+        element = find_element_by_xpath(driver, xpath)
+        element.click()
+        print(f"Elemente tıklandı: {xpath}")
+    except NoSuchElementException:
+        print(f"Element bulunamadı: {xpath}")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+
+
+#  def click_element(element):
+#     if element:
+#         try:
+#             element.click()
+#             print("Elemente tıklandı.")
+#         except Exception as e:
+#             print(f"Hata oluştu: {e}")
+#     else:
+#         print("Element bulunamadı.")
+
+# def set_text(element, text):
+#     if element:
+#         try:
+#             element.send_keys(text)
+#             print(f"'{text}' metni belirtilen alana yazıldı.")
+#         except Exception as e:
+#             print(f"Hata oluştu: {e}")
+#     else:
+#         print("Element bulunamadı.")
+
+#############Selenium Compenents (application)###################
+
 
 
 def get_request(method, url, data, headers):
@@ -164,3 +215,18 @@ def run_ansible_playbook(script, os, host_ip, username, password):
         raise Exception(e)
 
 
+driver_test=open_chrome_browser()
+navigate_to_url(driver_test,"https://www.youtube.com")
+give_time(5)
+
+
+xpath = "//input[@id='search']"  # Belirli bir giriş alanını tanımlayın (örneğin, ID'si ile)
+second_xpath ="//button[@id='search-icon-legacy']"
+
+text_to_set = "RPA"  # Girmek istediğiniz metni belirleyin
+find_and_set_text(driver_test,xpath,text_to_set)
+find_and_click_element(driver_test,second_xpath)
+
+
+
+#close_browser(driver_test)
