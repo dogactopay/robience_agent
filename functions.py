@@ -53,7 +53,7 @@ def find_elements_by_xpath(driver, xpath):
         return []
 
 def give_time(sleep_time):
-    timne.sleep(sleep_time)
+    time.sleep(sleep_time)
 
 
 def get_request(method, url, data, headers):
