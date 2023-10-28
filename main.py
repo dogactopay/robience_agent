@@ -36,7 +36,7 @@ if response_config.status_code == 200:
                 try:
 
                     exec(run_code, None, extra_parameters)
-                    # print(run_code)
+                    print(run_code)
 
                 except Exception as e:
                     print(e)
