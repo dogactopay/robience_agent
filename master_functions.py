@@ -4,6 +4,15 @@ import time
 import os
 
 
+def root_folder_get():
+    if os.name == 'nt':  # Windows
+        file_path = os.path.join(os.path.expanduser(
+            '~'), 'Documents/robenice_agent/')
+    else:
+        file_path = os.path.expanduser('~/Documents/robenice_agent/')
+    return file_path
+
+
 def check_license_key():
     while True:
         if os.name == 'nt':  # Windows
@@ -112,7 +121,7 @@ def generate_code(data):
         d_parameters = i['data']['data']['d_parameter'].replace(
             "$", "") if i['data']['data']['d_parameter'] else i['data']['data']['d_parameter'].replace("$", "")
 
-        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']))) for k in i['data']['data']['parameters']])}{spaceSt}{d_parameters}{brSt[1]}'''
+        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','').replace("'",'"') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']).replace("'",'"'))) for k in i['data']['data']['parameters']])}{spaceSt}{d_parameters}{brSt[1]}'''
 
         code_list.append(cont)
 

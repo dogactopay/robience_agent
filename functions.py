@@ -11,16 +11,25 @@ import chromedriver_autoinstaller
 import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-
+import chromedriver_autoinstall
+from master_functions import *
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 #############Selenium Compenents (application)###################
+
+
 def open_chrome_browser():
     try:
-        chromedriver_autoinstaller.install()
-        driver = webdriver.Chrome()
+
+        driver = webdriver.Chrome(service=ChromeService(
+            ChromeDriverManager().install()))
+
         print("Chrome tarayıcı açıldıı.")
         return driver
     except Exception as e:
         print(f"Hata oluştu: {e}")
+
 
 def navigate_to_url(driver, url):
     try:
@@ -29,12 +38,14 @@ def navigate_to_url(driver, url):
     except Exception as e:
         print(f"Hata oluştu: {e}")
 
+
 def close_browser(driver):
     try:
         driver.quit()
         print("Tarayıcı kapatıldı.")
     except Exception as e:
         print(f"Hata oluştu: {e}")
+
 
 def find_element_by_xpath(driver, xpath):
     try:
@@ -44,6 +55,7 @@ def find_element_by_xpath(driver, xpath):
         print(f"Element bulunamadı: {xpath}")
         return None
 
+
 def find_elements_by_xpath(driver, xpath):
     try:
         elements = driver.find_elements(By.XPATH, xpath)
@@ -51,6 +63,7 @@ def find_elements_by_xpath(driver, xpath):
     except NoSuchElementException:
         print(f"Elementler bulunamadı: {xpath}")
         return []
+
 
 def give_time(sleep_time):
     try:
@@ -61,24 +74,24 @@ def give_time(sleep_time):
         print(f"Hata oluştu: {e}")
 
 
- 
-def find_and_set_text(driver, xpath, text):
+def find_and_set_text(driver, xpath_field, text):
     try:
-        element = find_element_by_xpath(driver, xpath)
+        element = find_element_by_xpath(driver, xpath_field)
         element.send_keys(text)
-        print(f"'{text}' metni belirtilen alana yazıldı: {xpath}")
+        print(f"'{text}' metni belirtilen alana yazıldı: {xpath_field}")
     except NoSuchElementException:
-        print(f"Element bulunamadı: {xpath}")
+        print(f"Element bulunamadı: {xpath_field}")
     except Exception as e:
         print(f"Hata oluştu: {e}")
 
-def find_and_click_element(driver, xpath):
+
+def find_and_click_element(driver, xpath_field):
     try:
-        element = find_element_by_xpath(driver, xpath)
+        element = find_element_by_xpath(driver, xpath_field)
         element.click()
-        print(f"Elemente tıklandı: {xpath}")
+        print(f"Elemente tıklandı: {xpath_field}")
     except NoSuchElementException:
-        print(f"Element bulunamadı: {xpath}")
+        print(f"Element bulunamadı: {xpath_field}")
     except Exception as e:
         print(f"Hata oluştu: {e}")
 
@@ -104,7 +117,6 @@ def find_and_click_element(driver, xpath):
 #         print("Element bulunamadı.")
 
 #############Selenium Compenents (application)###################
-
 
 
 def get_request(method, url, data, headers):
@@ -182,7 +194,6 @@ def run_ansible_playbook(script, os, host_ip, username, password):
 
     r = ansible_runner.run(playbook=playbook, inventory=my_inventory[os], envvars={
                            "ANSIBLE_SHOW_CUSTOM_STATS": True, "ANSIBLE_STDOUT_CALLBACK": "json"})
-    
 
     string_encode = r.stdout.read().encode("ascii", "ignore")
     string_decode = string_encode.decode()
@@ -195,7 +206,7 @@ def run_ansible_playbook(script, os, host_ip, username, password):
     try:
 
         output = r.stdout.read()
-        #embed()
+        # embed()
         if "error" not in output.lower():
 
             indexOfOutPut = output.find("{", 0)
@@ -204,7 +215,8 @@ def run_ansible_playbook(script, os, host_ip, username, password):
             key0 = list(jsonOutput['stats'].keys())[0]
 
             if jsonOutput['stats'][key0]['failures'] > 0 or jsonOutput['stats'][key0]['unreachable'] > 0:
-                msg = ",".join([",".join([k['hosts'][key0]['msg']for k in z['tasks']]) for z in json.loads(res)['plays']])
+                msg = ",".join([",".join([k['hosts'][key0]['msg']
+                               for k in z['tasks']]) for z in json.loads(res)['plays']])
                 raise Exception(msg)
             else:
                 return "SUCCESS"
@@ -215,18 +227,4 @@ def run_ansible_playbook(script, os, host_ip, username, password):
         raise Exception(e)
 
 
-driver_test=open_chrome_browser()
-navigate_to_url(driver_test,"https://www.youtube.com")
-give_time(5)
-
-
-xpath = "//input[@id='search']"  # Belirli bir giriş alanını tanımlayın (örneğin, ID'si ile)
-second_xpath ="//button[@id='search-icon-legacy']"
-
-text_to_set = "RPA"  # Girmek istediğiniz metni belirleyin
-find_and_set_text(driver_test,xpath,text_to_set)
-find_and_click_element(driver_test,second_xpath)
-
-
-
-#close_browser(driver_test)
+# close_browser(driver_test)

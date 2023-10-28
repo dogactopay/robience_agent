@@ -34,8 +34,9 @@ if response_config.status_code == 200:
                 extra_parameters = create_extra_variables(response)
 
                 try:
-
+                    # embed()
                     exec(run_code, None, extra_parameters)
+
                     print(run_code)
 
                 except Exception as e:
