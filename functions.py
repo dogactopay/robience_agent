@@ -61,7 +61,6 @@ def give_time(sleep_time):
         print(f"Hata oluştu: {e}")
 
 
- 
 def find_and_set_text(driver, xpath, text):
     try:
         element = find_element_by_xpath(driver, xpath)
@@ -83,29 +82,14 @@ def find_and_click_element(driver, xpath):
         print(f"Hata oluştu: {e}")
 
 
-#  def click_element(element):
-#     if element:
-#         try:
-#             element.click()
-#             print("Elemente tıklandı.")
-#         except Exception as e:
-#             print(f"Hata oluştu: {e}")
-#     else:
-#         print("Element bulunamadı.")
-
-# def set_text(element, text):
-#     if element:
-#         try:
-#             element.send_keys(text)
-#             print(f"'{text}' metni belirtilen alana yazıldı.")
-#         except Exception as e:
-#             print(f"Hata oluştu: {e}")
-#     else:
-#         print("Element bulunamadı.")
-
 #############Selenium Compenents (application)###################
 
+#######Dataset Compenents########
 
+def write_dataset_to_excel(excel_path,dataframe):
+    dataframe.to_excel(excel_path, index=False, engine='openpyxl')
+
+#######Dataset Compenents########
 
 def get_request(method, url, data, headers):
     return rq.request(method=method, url=url, data=data, headers=headers).json()
@@ -215,18 +199,26 @@ def run_ansible_playbook(script, os, host_ip, username, password):
         raise Exception(e)
 
 
-driver_test=open_chrome_browser()
-navigate_to_url(driver_test,"https://www.youtube.com")
-give_time(5)
+# give_time(5)
+# hotel_data=[]
+# driver_test=open_chrome_browser()
+# navigate_to_url(driver_test,"https://www.trivago.com.tr/tr/srl/otel-adana-t%C3%BCrkiye?search=200-15236;dr-20231106-20231107;pr-3525-2147483647")
+# give_time(3)
 
+# xpath_names= "//li[@data-testid='accommodation-list-element']//button[@data-testid='item-name']//span[@itemprop='name']"
+# xpath_prices = "//li[@data-testid='accommodation-list-element']//p[@data-testid='recommended-price']"
 
-xpath = "//input[@id='search']"  # Belirli bir giriş alanını tanımlayın (örneğin, ID'si ile)
-second_xpath ="//button[@id='search-icon-legacy']"
+# hotel_names_elements=find_elements_by_xpath(driver_test,xpath_names)
+# hotel_prices_elements = find_elements_by_xpath(driver_test, xpath_prices)
 
-text_to_set = "RPA"  # Girmek istediğiniz metni belirleyin
-find_and_set_text(driver_test,xpath,text_to_set)
-find_and_click_element(driver_test,second_xpath)
+# for name_element, price_element in zip(hotel_names_elements, hotel_prices_elements):
+#     hotel_name = name_element.text
+#     hotel_price = price_element.text
+#     hotel_data.append([hotel_name, hotel_price])
 
+# df = pd.DataFrame(hotel_data, columns=["Otel Adı", "Fiyat"])
+# print(df)
 
+# write_dataset_to_excel("/Users/alioktemediz/Desktop/robeniceAgent/hotel.xlsx",df)
 
 #close_browser(driver_test)
