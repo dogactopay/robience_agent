@@ -20,15 +20,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 def open_chrome_browser():
-    try:
 
-        driver = webdriver.Chrome(service=ChromeService(
-            ChromeDriverManager().install()))
+    driver = webdriver.Chrome(service=ChromeService(
+        ChromeDriverManager().install()))
 
-        print("Chrome tarayıcı açıldıı.")
-        return driver
-    except Exception as e:
-        print(f"Hata oluştu: {e}")
+    print("Chrome tarayıcı açıldıı.")
+    return driver
+
 
 
 def navigate_to_url(driver, url):
