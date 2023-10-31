@@ -126,7 +126,11 @@ def generate_code(data):
             "{", "").replace(
             "}", "")
 
-        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + "f"+("'{}'".format(str(k['parameter_value']).replace("'",'"'))) for k in i['data']['data']['parameters']])}{spaceSt}{d_parameters}{brSt[1]}'''
+        contq = ','.join([str(k['parameter_name']) + '=' + (k['parameter_value'].replace("{", "").replace("}", "")
+                                                            if k['parameter_value'][0] == "{" and k['parameter_value'][-1] == "}" and k['parameter_value'].count("{") < 2 else "f"+("'{}'".format(str(
+                                                                k['parameter_value']).replace("'", '"'))))for k in i['data']['data']['parameters']])
+
+        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{contq}{spaceSt}{d_parameters}{brSt[1]}'''
 
         code_list.append(cont)
 
