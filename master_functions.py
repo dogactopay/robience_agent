@@ -121,9 +121,12 @@ def generate_code(data):
             "=" if i['data']['data']['return_variable'] else ""
 
         d_parameters = i['data']['data']['d_parameter'].replace(
-            "$", "") if i['data']['data']['d_parameter'] else i['data']['data']['d_parameter'].replace("$", "")
+            "{", "").replace(
+            "}", "") if i['data']['data']['d_parameter'] else i['data']['data']['d_parameter'].replace(
+            "{", "").replace(
+            "}", "")
 
-        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + (str(k['parameter_value']).replace('$','').replace("'",'"') if str(k['parameter_value'])[0] == '$' else "'{}'".format(str(k['parameter_value']).replace("'",'"'))) for k in i['data']['data']['parameters']])}{spaceSt}{d_parameters}{brSt[1]}'''
+        cont = f'''{hierarcy_add}{returnSt}{i['data']['component_name']}{brSt[0]}{','.join([ str(k['parameter_name']) +'=' + "f"+("'{}'".format(str(k['parameter_value']).replace("'",'"'))) for k in i['data']['data']['parameters']])}{spaceSt}{d_parameters}{brSt[1]}'''
 
         code_list.append(cont)
 
