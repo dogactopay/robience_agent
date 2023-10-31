@@ -11,6 +11,7 @@ import chromedriver_autoinstaller
 import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+import requests
 
 #############Selenium Compenents (application)###################
 def open_chrome_browser():
@@ -92,6 +93,21 @@ def find_and_get_text(driver,xpath):
     except Exception as e:
         print(f"Hata oluştu: {e}")
 
+def get_element_count(driver, xpath):
+    element_count = None
+    try:
+        elements = find_elements_by_xpath(driver, xpath)
+        element_count = len(elements)
+        print(f"Element sayısı: {element_count}")
+    except NoSuchElementException:
+        print(f"Element bulunamadı: {xpath}")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+    
+    return element_count
+
+
+
 
 
 #############Selenium Compenents (application)###################
@@ -111,9 +127,40 @@ def add_column(dataframe, column_name):
     dataframe[column_name] = None
     return dataframe
 
+def add_empty_rows(dataframe, row_number=1):
+    empty_data = {col: [None] * num_rows for col in dataframe.columns}
+    empty_df = pd.DataFrame(empty_data)
+    updated_dataframe = pd.concat([dataframe, empty_df], ignore_index=True)
+    return updated_dataframe
+
+def set_data(dataframe, row_number, col_number, value):
+    try:
+        dataframe.iat[row_number, col_number] = value
+    except Exception as a:
+        return str(a)
 
 
 #######Dataset Compenents########
+
+#######alert  Compenents########
+def create_alert(customer, alert_content,status):
+    url = "http://185.185.82.233/alert/new/"  # API endpoint URL
+    data = {
+        "customer": customer,
+        "alert_content": alert_content,
+        "status": status 
+    }
+
+    try:
+        response = requests.post(url, json=data)
+        if response.status_code == 201:  
+            print("Alert başarıyla oluşturuldu.")
+        else:
+            print(f"Hata kodu: {response.status_code}")
+            print(f"Hata mesajı: {response.text}")
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+#######alert  Compenents########
 
 def get_request(method, url, data, headers):
     return rq.request(method=method, url=url, data=data, headers=headers).json()
@@ -245,3 +292,5 @@ def run_ansible_playbook(script, os, host_ip, username, password):
 # write_dataset_to_excel("/Users/alioktemediz/Desktop/robeniceAgent/hotel.xlsx",df)
 
 #close_browser(driver_test)
+
+create_alert(1,"some problem",0)
