@@ -32,7 +32,7 @@ if response_config.status_code == 200:
                 run_code = generate_code(data)
 
                 extra_parameters = create_extra_variables(response)
-
+                embed()
                 try:
                     # embed()
                     exec(run_code, None, extra_parameters)

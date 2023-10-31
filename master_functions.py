@@ -48,6 +48,8 @@ def create_extra_variables(data):
 
     q = {f"ext_{k}": data[0]['extra_parameters'][k]
          for k in data[0]['extra_parameters']}
+    q["ext_customer"] = data[0]['customer']
+
     return q
 
 
