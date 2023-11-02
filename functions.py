@@ -12,12 +12,17 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import requests
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import ChromiumOptions
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+
 
 #############Selenium Compenents (application)###################
 def open_chrome_browser():
     try:
-        chromedriver_autoinstaller.install()
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         print("Chrome tarayıcı açıldıı.")
         return driver
     except Exception as e:
