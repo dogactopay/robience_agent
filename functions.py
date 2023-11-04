@@ -12,17 +12,13 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import requests
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import ChromiumOptions
-from webdriver_manager.chrome import ChromeDriverManager
-
-
 
 
 #############Selenium Compenents (application)###################
 def open_chrome_browser():
     try:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        chromedriver_autoinstaller.install()
+        driver = webdriver.Chrome()
         print("Chrome tarayıcı açıldıı.")
         return driver
     except Exception as e:
@@ -119,11 +115,11 @@ def get_element_count(driver, xpath):
 
 #######Dataset Compenents########
 
-def write_dataset_to_excel(excel_path,dataframe):
-    dataframe.to_excel(excel_path, index=False, engine='openpyxl')
+def write_dataset_to_excel(file_path,dataframe):
+    dataframe.to_excel(file_path, index=False, engine='openpyxl')
 
-def read_excel_to_dataset(excel_path):
-    return pd.read_excel(excel_path, engine='openpyxl')
+def read_excel_to_dataset(file_path):
+    return pd.read_excel(file_path, engine='openpyxl')
 
 def create_empty_dataset():
     return pd.DataFrame()
@@ -132,17 +128,25 @@ def add_column(dataframe, column_name):
     dataframe[column_name] = None
     return dataframe
 
-def add_empty_rows(dataframe, row_number=1):
-    empty_data = {col: [None] * num_rows for col in dataframe.columns}
-    empty_df = pd.DataFrame(empty_data)
-    updated_dataframe = pd.concat([dataframe, empty_df], ignore_index=True)
-    return updated_dataframe
+# def add_empty_rows(dataframe,row_number=1):
+#     new_row = pd.Series([None] * len(dataframe.columns), index=dataframe.columns)
+#     updated_dataframe = pd.concat([dataframe, new_row.to_frame().T], ignore_index=True)
+#     return updated_dataframe
 
-def set_data(dataframe, row_number, col_number, value):
-    try:
-        dataframe.iat[row_number, col_number] = value
-    except Exception as a:
-        return str(a)
+def add_empty_rows(dataframe,row_number=1):
+    # Create an empty row with NaN values
+    empty_row = pd.DataFrame({col: [pd.NA] for col in dataframe.columns})
+    
+    # Append the empty row to the DataFrame
+    dataframe = dataframe._append(empty_row, ignore_index=True)
+    
+    return dataframe
+    
+def set_data(dataframe, row_number, col_number, data_value):
+    dataframe.iat[int(row_number), int(col_number)] = data_value
+
+    
+
 
 
 #######Dataset Compenents########
@@ -298,4 +302,12 @@ def run_ansible_playbook(script, os, host_ip, username, password):
 
 #close_browser(driver_test)
 
-create_alert(1,"some problem",0)
+#create_alert(1,"some problem",0)
+
+
+# (//li[@data-testid='accommodation-list-element']//button[@data-testid='item-name']//span[@itemprop='name'])[{counter}]
+# (//li[@data-testid='accommodation-list-element']//p[@data-testid='recommended-price'])[{counter}]
+
+# //li[@data-testid='accommodation-list-element']//button[@data-testid='item-name']//span[@itemprop='name']
+# //li[@data-testid='accommodation-list-element']//p[@data-testid='recommended-price']
+#set_data(dataframe=updated_dataframe,row_number=counter,col_number=f'0',data_value=hotel_name)
